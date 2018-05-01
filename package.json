@@ -1,0 +1,12 @@
+{
+  "name": "static-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
