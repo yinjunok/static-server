@@ -12,12 +12,18 @@ class StaticServer {
 
   run() {
     http.createServer((req, res) => {
-      const pathname = this.root + url.parse(req.url).pathname;
-      this.response(pathname, req, res);
+      const pathname = this._parsePathname(req);
+      console.log(pathname);
+      this._response(pathname, req, res);
     }).listen(this.port);
   }
 
-  response(pathname, req, res) {
+  _parsePathname(req) {
+    const pathname = url.parse(req.url).pathname;
+    return this.root + pathname.replace(/(\.\.\/|\.\/)/g, '');
+  }
+
+  _response(pathname, req, res) {
     fs.stat(pathname, (err, stat) => {
       if (err) {
         console.log(err);
